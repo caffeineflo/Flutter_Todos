@@ -1,0 +1,14 @@
+name: todos_memory_api
+description: A Flutter implementation of the TodosApi that uses local storage.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  rxdart: ^0.27.2
+  todos_api:
+    path: ../todos_api

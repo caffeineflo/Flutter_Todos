@@ -1,0 +1,24 @@
+name: flutter_todos
+description: An example todos app that showcases bloc state management patterns.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  bloc: ^8.0.1
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.0.0
+  flutter_localizations:
+    sdk: flutter
+  todos_memory_api:
+    path: ../todos_memory_api
+  todos_api:
+    path: ../todos_api
+  todos_repository:
+    path: ../todos_repository
+
+flutter:
+  uses-material-design: true

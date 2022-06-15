@@ -1,0 +1,11 @@
+name: todos_repository
+description: A repository that handles todo related requests.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+
+dependencies:
+  todos_api:
+    path: ../todos_api
