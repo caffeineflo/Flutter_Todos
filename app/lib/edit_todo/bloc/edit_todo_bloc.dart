@@ -12,7 +12,7 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
   })  : _todosRepository = todosRepository,
         super(
           EditTodoState(
-              initialTodo: initialTodo, title: initialTodo?.title ?? ''),
+              initialTodo: initialTodo, title: initialTodo?.todo_title ?? ''),
         ) {
     on<EditTodoTitleChanged>(_onTitleChanged);
     on<EditTodoDescriptionChanged>(_onDescriptionChanged);
@@ -40,7 +40,7 @@ class EditTodoBloc extends Bloc<EditTodoEvent, EditTodoState> {
     Emitter<EditTodoState> emit,
   ) async {
     emit(state.copyWith(status: EditTodoStatus.loading));
-    final todo = (state.initialTodo ?? Todo(title: '')).copyWith(
+    final todo = (state.initialTodo ?? Todo(todo_title: '')).copyWith(
       title: state.title,
     );
 

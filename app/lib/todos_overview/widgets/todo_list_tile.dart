@@ -36,10 +36,10 @@ class TodoListTile extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         title: Text(
-          todo.title,
+          todo.todo_title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: !todo.completed
+          style: !todo.isCompleted
               ? null
               : TextStyle(
                   color: captionColor,
@@ -50,7 +50,7 @@ class TodoListTile extends StatelessWidget {
           shape: const ContinuousRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          value: todo.completed,
+          value: todo.isCompleted,
           onChanged: onToggleCompleted == null
               ? null
               : (value) => onToggleCompleted!(value!),

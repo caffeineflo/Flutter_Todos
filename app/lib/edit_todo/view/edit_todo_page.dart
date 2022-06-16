@@ -88,7 +88,7 @@ class _TitleField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<EditTodoBloc>().state;
-    final hintText = state.initialTodo?.title ?? '';
+    final hintText = state.initialTodo?.todo_title ?? '';
 
     return TextFormField(
       key: const Key('editTodoView_title_textFormField'),

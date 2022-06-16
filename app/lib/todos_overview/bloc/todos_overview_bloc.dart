@@ -44,7 +44,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     TodosOverviewTodoCompletionToggled event,
     Emitter<TodosOverviewState> emit,
   ) async {
-    final newTodo = event.todo.copyWith(completed: event.isCompleted);
+    final newTodo = event.todo.copyWith(isCompleted: event.isCompleted);
     await _todosRepository.saveTodo(newTodo);
   }
 
@@ -81,7 +81,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     TodosOverviewToggleAllRequested event,
     Emitter<TodosOverviewState> emit,
   ) async {
-    final areAllCompleted = state.todos.every((todo) => todo.completed);
+    final areAllCompleted = state.todos.every((todo) => todo.isCompleted);
     await _todosRepository.completeAll(isCompleted: !areAllCompleted);
   }
 

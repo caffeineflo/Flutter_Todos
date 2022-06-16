@@ -19,6 +19,8 @@ dependencies:
     path: ../todos_api
   todos_repository:
     path: ../todos_repository
+  todos_rest_api:
+    path: ../todos_rest_api
 
 flutter:
   uses-material-design: true

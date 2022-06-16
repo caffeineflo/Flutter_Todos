@@ -8,9 +8,9 @@ extension TodosViewFilterX on TodosViewFilter {
       case TodosViewFilter.all:
         return true;
       case TodosViewFilter.activeOnly:
-        return !todo.completed;
+        return !todo.isCompleted;
       case TodosViewFilter.completedOnly:
-        return todo.completed;
+        return todo.isCompleted;
     }
   }
 

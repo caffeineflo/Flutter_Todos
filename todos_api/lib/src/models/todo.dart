@@ -3,8 +3,8 @@ import 'package:uuid/uuid.dart';
 class Todo {
   Todo({
     String? id,
-    required this.title,
-    this.completed = false,
+    required this.todo_title,
+    this.isCompleted = false,
   })  : assert(
           id == null || id.isNotEmpty,
           'id can not be null and should be empty',
@@ -13,23 +13,33 @@ class Todo {
 
   final String id;
 
-  final String title;
+  final String todo_title;
 
-  final bool completed;
+  final bool isCompleted;
 
   Todo copyWith({
     String? id,
     String? title,
     String? description,
-    bool? completed,
+    bool? isCompleted,
   }) {
     return Todo(
       id: id ?? this.id,
-      title: title ?? this.title,
-      completed: completed ?? this.completed,
+      todo_title: title ?? this.todo_title,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
-  @override
-  List<Object> get props => [id, title, completed];
+  static Todo? fromJson(dynamic value) {
+    if (value is Map) {
+      final json = value.cast<String, dynamic>();
+
+      return Todo(
+        id: const Uuid().v4(),
+        todo_title: "Fake",
+        isCompleted: true,
+      );
+    }
+    return null;
+  }
 }
