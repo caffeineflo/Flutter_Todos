@@ -49,8 +49,8 @@ class TodosRestAPI extends TodosApi {
   @override
   Future<int> clearCompleted() async {
     final todos = [..._todoStreamController.value];
-    final completedTodosAmount = todos.where((t) => t.isCompleted).length;
-    todos.removeWhere((t) => t.isCompleted);
+    final completedTodosAmount = todos.where((t) => t.completed).length;
+    todos.removeWhere((t) => t.completed);
     _todoStreamController.add(todos);
     return completedTodosAmount;
   }
@@ -59,7 +59,7 @@ class TodosRestAPI extends TodosApi {
   Future<int> completeAll({required bool isCompleted}) async {
     final todos = [..._todoStreamController.value];
     final changedTodosAmount =
-        todos.where((t) => t.isCompleted != isCompleted).length;
+        todos.where((t) => t.completed != isCompleted).length;
     final newTodos = [
       for (final todo in todos) todo.copyWith(isCompleted: isCompleted)
     ];
