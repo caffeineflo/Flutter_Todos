@@ -16,6 +16,52 @@ class TodosRESTInterface {
 
   final ApiClient apiClient;
 
+  /// Performs an HTTP 'POST /todos' operation and returns the [Response].
+  /// Parameters:
+  ///
+  /// * [Todo] todo (required):
+  ///   Add a new todo
+  Future<Response> createTodoWithHttpInfo(
+    Todo todo,
+  ) async {
+    // ignore: prefer_const_declarations
+    final path = r'/todos';
+
+    // ignore: prefer_final_locals
+    Object? postBody = todo;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>['application/json'];
+
+    return apiClient.invokeAPI(
+      path,
+      'POST',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Parameters:
+  ///
+  /// * [Todo] todo (required):
+  ///   Add a new todo
+  Future<void> createTodo(
+    Todo todo,
+  ) async {
+    final response = await createTodoWithHttpInfo(
+      todo,
+    );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+  }
+
   /// Returns a todo by id
   ///
   /// Note: This method returns the HTTP [Response].
@@ -121,6 +167,77 @@ class TodosRESTInterface {
               as List)
           .cast<Todo>()
           .toList();
+    }
+    return null;
+  }
+
+  /// Update a todo
+  ///
+  /// Note: This method returns the HTTP [Response].
+  ///
+  /// Parameters:
+  ///
+  /// * [int] id (required):
+  ///   The user id.
+  ///
+  /// * [Todo] todo (required):
+  ///   Update a new todo
+  Future<Response> updateTodoWithHttpInfo(
+    int id,
+    Todo todo,
+  ) async {
+    // ignore: prefer_const_declarations
+    final path = r'/todos/{id}'.replaceAll('{id}', id.toString());
+
+    // ignore: prefer_final_locals
+    Object? postBody = todo;
+
+    final queryParams = <QueryParam>[];
+    final headerParams = <String, String>{};
+    final formParams = <String, String>{};
+
+    const contentTypes = <String>['application/json'];
+
+    return apiClient.invokeAPI(
+      path,
+      'PUT',
+      queryParams,
+      postBody,
+      headerParams,
+      formParams,
+      contentTypes.isEmpty ? null : contentTypes.first,
+    );
+  }
+
+  /// Update a todo
+  ///
+  /// Parameters:
+  ///
+  /// * [int] id (required):
+  ///   The user id.
+  ///
+  /// * [Todo] todo (required):
+  ///   Update a new todo
+  Future<Todo?> updateTodo(
+    int id,
+    Todo todo,
+  ) async {
+    final response = await updateTodoWithHttpInfo(
+      id,
+      todo,
+    );
+    if (response.statusCode >= HttpStatus.badRequest) {
+      throw ApiException(response.statusCode, await _decodeBodyBytes(response));
+    }
+    // When a remote server returns no body with a status of 204, we shall not decode it.
+    // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
+    // FormatException when trying to decode an empty string.
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Todo',
+      ) as Todo;
     }
     return null;
   }
