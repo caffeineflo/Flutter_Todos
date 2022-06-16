@@ -1,3 +1,14 @@
 query getTodos {
-
+  todos(options: {
+    paginate: {
+      page: 0,
+      limit: 100
+    }
+  }) {
+    data {
+      id
+      title
+      completed
+    }
+  }
 }

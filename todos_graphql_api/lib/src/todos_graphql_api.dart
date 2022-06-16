@@ -16,8 +16,12 @@ class TodosGraphQLAPI extends TodosApi {
   void _init() {
     _graphClient.request(GgetTodosReq()).listen((response) {
       if (response.data != null && !response.hasErrors) {
-        //print(response.data!.todos!.data!);
-        //_todoStreamController.add(todos);
+        final graphQLTodos = response.data!.todos!.data!;
+        final todos = [
+          for (final todo in graphQLTodos)
+            Todo(id: todo.id, title: todo.title!, completed: todo.completed!)
+        ];
+        _todoStreamController.add(todos);
       }
     });
   }

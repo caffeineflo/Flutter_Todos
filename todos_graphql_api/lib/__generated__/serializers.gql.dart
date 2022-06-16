@@ -34,7 +34,7 @@ import 'package:todos_graphql_api/__generated__/schema.schema.gql.dart'
         GUpdateUserInput,
         GUpload;
 import 'package:todos_graphql_api/src/__generated__/getTodos.data.gql.dart'
-    show GgetTodosData;
+    show GgetTodosData, GgetTodosData_todos, GgetTodosData_todos_data;
 import 'package:todos_graphql_api/src/__generated__/getTodos.req.gql.dart'
     show GgetTodosReq;
 import 'package:todos_graphql_api/src/__generated__/getTodos.var.gql.dart'
@@ -72,6 +72,8 @@ final SerializersBuilder _serializersBuilder = _$serializers.toBuilder()
   GUpdateUserInput,
   GUpload,
   GgetTodosData,
+  GgetTodosData_todos,
+  GgetTodosData_todos_data,
   GgetTodosReq,
   GgetTodosVars
 ])
