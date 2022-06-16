@@ -13,8 +13,8 @@ dependencies:
   flutter_bloc: ^8.0.0
   flutter_localizations:
     sdk: flutter
-  todos_memory_api:
-    path: ../todos_memory_api
+  todos_graphql_api:
+    path: ../todos_graphql_api
   todos_api:
     path: ../todos_api
   todos_repository:

@@ -1,0 +1,29 @@
+name: todos_graphql_api
+description: A Flutter implementation of the TodosApi that uses a GraphQL API.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  ferry:
+    git:
+      url: https://github.com/gql-dart/ferry.git
+      path: packages/ferry/
+      ref: master
+  flutter:
+    sdk: flutter
+  rxdart: ^0.27.2
+  todos_api:
+    path: ../todos_api
+  gql_build: ^0.4.0
+  gql_http_link: ^0.4.0
+  
+dev_dependencies:
+  build_runner: ^2.0.4
+  ferry_generator: 
+    git:
+      url: https://github.com/gql-dart/ferry.git
+      path: packages/ferry_generator/
+      ref: master
