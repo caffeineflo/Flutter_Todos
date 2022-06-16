@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: JSON Placeholder API
+  description: See https://jsonplaceholder.typicode.com/
+paths:
+  /todos:
+    get:
+      description: Returns all todos
+      tags: ["Todos"]
+      operationId: "getTodos"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/TodosList"
+    post:
+      tags: ["Todos"]
+      operationId: "createTodo"
+      requestBody:
+        description: Add a new todo
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Todo"
+
+      responses:
+        '201':
+          description: Created
+
+  /todos/{id}:
+    get:
+      description: Returns a post by id
+      tags: ["Todos"]
+      operationId: "getTodo"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The user id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Todo"
+        "404":
+          description: Todo not found
+    put:
+      summary: Update a todo
+      tags: ["Todos"]
+      operationId: "updateTodo"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The user id.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update a new todo
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Todo"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Todo"
+      
+components:
+  schemas:
+    TodosList:
+      "type": "array"
+      "items":
+        $ref: "#/components/schemas/Todo"
+    Todo:
+      "type": "object"
+      "required":
+        - "id"
+        - "userId"
+        - "title"
+        - "completed"
+      "properties":
+        id:
+          type: "integer"
+        userId:
+          type: "integer"
+        title:
+          type: "string"
+        completed:
+          type: "string"
